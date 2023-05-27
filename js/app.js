@@ -65,6 +65,23 @@ document.addEventListener('DOMContentLoaded',() =>{
   timerId = setInterval(moveDown, 1000)
 
 
+
+
+  //Asignacion de funciones a las teclas
+  function control(e) {
+    if(e.keyCode === 37) {
+      moveLeft()
+    } else if (e.keyCode === 38) {
+      //rotate()
+    } else if (e.keyCode === 39){
+      moveRight()
+    } else if (e.keyCode === 40) {
+      moveDown()
+    }
+
+  }
+  document.addEventListener('keyup', control)
+
   //move down function
   function moveDown() {
     undraw ()
@@ -85,7 +102,7 @@ document.addEventListener('DOMContentLoaded',() =>{
   }
 }
 
-//Mover el tetromino, hasta el borde o que se bloquee
+//Mover el tetromino hacia la izquierda, hasta el borde o que se bloquee
 undraw()
 const isAtleftEdge = current.some(index => (currentPosition + index) % width === 0)
 
@@ -95,4 +112,15 @@ if(current.some(index => squares[currentPosition + index].classList.contains('ta
   currentPosition +=1
 }
 draw()
-})
+}
+//Mover el tetromino hacia la derecha, hasta el borde o que se bloquee
+
+  function moveRight(){
+    undraw()
+    const isAtrightEdge = current.some(index =>(currentPosition + index) % width === width -1)
+    if(!isAtrightEdge) currentPosition +=1
+    if(current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
+      currentPosition -=1
+    }
+  }
+)
